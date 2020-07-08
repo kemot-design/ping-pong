@@ -35,6 +35,13 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
           if((Key == 'Z') || (Key == 'z')){
                 timerPaddleLDown->Enabled = true;
          }
+
+         if(Key == VK_UP){
+                timerPaddleRUp->Enabled = true;
+         }
+          if(Key == VK_DOWN){
+                timerPaddleRDown->Enabled = true;
+         }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::timerPaddleLDownTimer(TObject *Sender)
@@ -51,6 +58,13 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
          }
           if((Key == 'Z') || (Key == 'z')){
                 timerPaddleLDown->Enabled = false;
+         }
+
+         if(Key == VK_UP){
+                timerPaddleRUp->Enabled = false;
+         }
+          if(Key == VK_DOWN){
+                timerPaddleRDown->Enabled = false;
          }
 }
 //---------------------------------------------------------------------------
@@ -88,13 +102,13 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::timerPaddleRUpTimer(TObject *Sender)
 {
-        if(paddleR->Top > 10) paddleL->Top -= 10;        
+        if(paddleR->Top > 10) paddleR->Top -= 10;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::timerPaddleRDownTimer(TObject *Sender)
 {
-        if(paddleL->Top < tlo->Height - 10) paddleL->Top += 10;
+        if(paddleR->Top + paddleR->Height < tlo->Height - 10) paddleR->Top += 10;
 }
 //---------------------------------------------------------------------------
 
