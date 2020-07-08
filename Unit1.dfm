@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 223
-  Top = 148
+  Left = -1063
+  Top = 493
   Width = 1017
   Height = 583
   Caption = 'Form1'
@@ -265,5 +265,19 @@ object Form1: TForm1
     OnTimer = timerBallTimer
     Left = 320
     Top = 40
+  end
+  object timerPaddleRUp: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = timerPaddleRUpTimer
+    Left = 928
+    Top = 40
+  end
+  object timerPaddleRDown: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = timerPaddleRDownTimer
+    Left = 928
+    Top = 80
   end
 end
