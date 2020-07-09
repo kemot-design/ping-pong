@@ -14,7 +14,6 @@
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-        TShape *tlo;
         TImage *paddleL;
         TImage *paddleR;
         TTimer *timerPaddleLUp;
@@ -23,6 +22,7 @@ __published:	// IDE-managed Components
         TTimer *timerBall;
         TTimer *timerPaddleRUp;
         TTimer *timerPaddleRDown;
+        TImage *tlo;
         void __fastcall timerPaddleLUpTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);

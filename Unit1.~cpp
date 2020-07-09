@@ -81,6 +81,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
         if(ball->Left <= tlo->Left + 10){
                 timerBall->Enabled = false;
                 ball->Visible = false;
+                ShowMessage("Game over! Right player have won!");
         }
         else if(ball->Top >= paddleL->Top - ball->Height/2 &&
         ball->Top <= paddleL->Top + paddleL->Height + ball->Height/2 &&
@@ -91,6 +92,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
         if(ball->Left + ball->Width >= tlo->Width - 10){
                 timerBall->Enabled = false;
                 ball->Visible = false;
+                ShowMessage("Game over! Left player have won!");
         }
         else if(ball->Top >= paddleR->Top - ball->Height/2 &&
         ball->Top <= paddleR->Top + paddleR->Height + ball->Height/2 &&
