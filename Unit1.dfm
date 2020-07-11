@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = -1161
-  Top = 460
+  Left = -1176
+  Top = 391
   Width = 1017
   Height = 583
   Caption = 'Form1'
@@ -49082,7 +49082,7 @@ object Form1: TForm1
       D9}
   end
   object ball: TImage
-    Left = 320
+    Left = 352
     Top = 192
     Width = 75
     Height = 75
@@ -49627,6 +49627,21 @@ object Form1: TForm1
       FFFFFFFFFFFFFFFFFFFFFF000000}
     Transparent = True
   end
+  object Button1: TButton
+    Left = 384
+    Top = 192
+    Width = 227
+    Height = 97
+    Caption = 'Start!'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = Button1Click
+  end
   object timerPaddleLUp: TTimer
     Enabled = False
     Interval = 20
@@ -49645,8 +49660,8 @@ object Form1: TForm1
     Enabled = False
     Interval = 20
     OnTimer = timerBallTimer
-    Left = 320
-    Top = 40
+    Left = 376
+    Top = 48
   end
   object timerPaddleRUp: TTimer
     Enabled = False

@@ -1,6 +1,6 @@
 object gameMenu: TgameMenu
-  Left = 279
-  Top = 184
+  Left = -1241
+  Top = 532
   BorderStyle = bsToolWindow
   Caption = 'gameMenu'
   ClientHeight = 441

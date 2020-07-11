@@ -73,30 +73,28 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
         ball->Top += ballY;
         ball->Left += ballX;
 
-        if(ball->Left <= tlo->Left + 10) ballX = -ballX;
-        if(ball->Left + ball->Width >= tlo->Width - 10) ballX = -ballX;
         if(ball->Top <= 10) ballY = -ballY;
         if(ball->Top + ball->Height >= tlo->Height - 10) ballY = -ballY;
 
-        if(ball->Left <= tlo->Left + 10){
+        if(ball->Left <= tlo->Left - ball->Width){
                 timerBall->Enabled = false;
                 ball->Visible = false;
                 ShowMessage("Game over! Right player have won!");
         }
         else if(ball->Top >= paddleL->Top - ball->Height/2 &&
-        ball->Top <= paddleL->Top + paddleL->Height + ball->Height/2 &&
-        ball->Left <= paddleL->Left + paddleL->Width){
+                ball->Top <= paddleL->Top + paddleL->Height + ball->Height/2 &&
+                ball->Left <= paddleL->Left + paddleL->Width){
                 if(ballX < 0) ballX = -ballX;
         }
 
-        if(ball->Left + ball->Width >= tlo->Width - 10){
+        if(ball->Left >= tlo->Width){
                 timerBall->Enabled = false;
                 ball->Visible = false;
                 ShowMessage("Game over! Left player have won!");
         }
         else if(ball->Top >= paddleR->Top - ball->Height/2 &&
-        ball->Top <= paddleR->Top + paddleR->Height + ball->Height/2 &&
-        ball->Left + ball->Width >= paddleR->Left){
+                ball->Top <= paddleR->Top + paddleR->Height + ball->Height/2 &&
+                ball->Left + ball->Width >= paddleR->Left){
                 if(ballX > 0) ballX = -ballX;
         }
 
@@ -111,6 +109,14 @@ void __fastcall TForm1::timerPaddleRUpTimer(TObject *Sender)
 void __fastcall TForm1::timerPaddleRDownTimer(TObject *Sender)
 {
         if(paddleR->Top + paddleR->Height < tlo->Height - 10) paddleR->Top += 10;
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+        timerBall->Enabled = true;
+        Button1->Visible = false;
 }
 //---------------------------------------------------------------------------
 
