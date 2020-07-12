@@ -1,9 +1,9 @@
-object Form1: TForm1
-  Left = -1176
-  Top = 391
-  Width = 1017
-  Height = 583
-  Caption = 'Form1'
+object gameboard: Tgameboard
+  Left = -1478
+  Top = 345
+  Width = 1012
+  Height = 598
+  Caption = 'gameboard'
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -49627,12 +49627,42 @@ object Form1: TForm1
       FFFFFFFFFFFFFFFFFFFFFF000000}
     Transparent = True
   end
+  object Label1: TLabel
+    Left = 254
+    Top = 104
+    Width = 492
+    Height = 28
+    Alignment = taCenter
+    Caption = 'Right player have won the round'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
+  object Label2: TLabel
+    Left = 432
+    Top = 144
+    Width = 110
+    Height = 28
+    Alignment = taCenter
+    Caption = 'Score: '
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
   object Button1: TButton
-    Left = 384
-    Top = 192
+    Left = 376
+    Top = 176
     Width = 227
     Height = 97
-    Caption = 'Start!'
+    Caption = 'Start! [space]'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -27
@@ -49641,6 +49671,48 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 0
     OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 160
+    Top = 359
+    Width = 177
+    Height = 81
+    Caption = 'Next round'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Button3: TButton
+    Left = 408
+    Top = 359
+    Width = 177
+    Height = 81
+    Caption = 'New game'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object Button4: TButton
+    Left = 657
+    Top = 359
+    Width = 177
+    Height = 81
+    Caption = 'Exit'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
   end
   object timerPaddleLUp: TTimer
     Enabled = False

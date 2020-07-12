@@ -24,6 +24,8 @@ __published:	// IDE-managed Components
         TTimer *timerPaddleRDown;
         TImage *tlo;
         TButton *Button1;
+        TLabel *Label1;
+        TLabel *Label2;
         void __fastcall timerPaddleLUpTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);

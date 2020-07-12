@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = -1176
-  Top = 391
-  Width = 1017
+  Left = -1436
+  Top = 396
+  Width = 1089
   Height = 583
   Caption = 'Form1'
   Color = clBtnFace
@@ -49627,9 +49627,39 @@ object Form1: TForm1
       FFFFFFFFFFFFFFFFFFFFFF000000}
     Transparent = True
   end
+  object Label1: TLabel
+    Left = 184
+    Top = 112
+    Width = 609
+    Height = 41
+    Alignment = taCenter
+    Caption = 'Right player have won the round'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
+  object Label2: TLabel
+    Left = 336
+    Top = 176
+    Width = 321
+    Height = 41
+    Alignment = taCenter
+    Caption = 'Score: '
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    Layout = tlCenter
+  end
   object Button1: TButton
     Left = 384
-    Top = 192
+    Top = 200
     Width = 227
     Height = 97
     Caption = 'Start!'

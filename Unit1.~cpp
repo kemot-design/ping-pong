@@ -9,8 +9,15 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int ballY = 10;
-int ballX = 10;
+int ballXMove = 10;
+int ballYMove = 5;
+int regularBallXMove = 10;
+int regularBallYMove = 5;
+
+void gameOver(){
+
+        
+}
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -70,11 +77,10 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 void __fastcall TForm1::timerBallTimer(TObject *Sender)
 {
-        ball->Top += ballY;
-        ball->Left += ballX;
 
-        if(ball->Top <= 10) ballY = -ballY;
-        if(ball->Top + ball->Height >= tlo->Height - 10) ballY = -ballY;
+        if((ball->Top <= 10) || (ball->Top + ball->Height >= tlo->Height - 10)){
+           ballYMove = -ballYMove;
+        }
 
         if(ball->Left <= tlo->Left - ball->Width){
                 timerBall->Enabled = false;
@@ -84,7 +90,15 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
         else if(ball->Top >= paddleL->Top - ball->Height/2 &&
                 ball->Top <= paddleL->Top + paddleL->Height + ball->Height/2 &&
                 ball->Left <= paddleL->Left + paddleL->Width){
-                if(ballX < 0) ballX = -ballX;
+
+                if(ball->Top >= paddleL->Top && ball->Top <= paddleL->Top + paddleL->Height ){
+                        ballXMove = -regularBallXMove * 3;
+                }
+                else {
+                        ballXMove = -regularBallXMove;
+                }
+
+                ballXMove = -ballXMove;
         }
 
         if(ball->Left >= tlo->Width){
@@ -95,9 +109,11 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
         else if(ball->Top >= paddleR->Top - ball->Height/2 &&
                 ball->Top <= paddleR->Top + paddleR->Height + ball->Height/2 &&
                 ball->Left + ball->Width >= paddleR->Left){
-                if(ballX > 0) ballX = -ballX;
+                   ballXMove = -regularBallXMove;
         }
 
+        ball->Top += ballYMove;
+        ball->Left += ballXMove;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::timerPaddleRUpTimer(TObject *Sender)
