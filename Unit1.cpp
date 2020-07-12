@@ -92,19 +92,21 @@ void __fastcall Tgameboard::FormKeyUp(TObject *Sender, WORD &Key,
 void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
 {
         if(gameTime > 0 && gameTime % 500 == 0){
-            regularBallXMove += 4;
-            regularBallYMove += 2;
+            regularBallXMove *= 1.5;
+            regularBallYMove *= 1.5;
         }
 
+        //bounce top
         if(ball->Top <= 10){
             ballYMove = regularBallYMove;
         }
 
-
+        // bounde botton
         else if(ball->Top + ball->Height >= tlo->Height - 10){
            ballYMove = -regularBallYMove;
         }
 
+        //left paddle bounce or fail
         if(ball->Left < paddleL->Left - 10){
                 timerBall->Enabled = false;
                 ball->Visible = false;
@@ -124,18 +126,21 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 ball->Top <= paddleL->Top + paddleL->Height - (ball->Height/2) &&
                 ball->Left <= paddleL->Left + paddleL->Width){
 
-                if(ball->Top >= paddleL->Top + 20 &&
-                ball->Top <= paddleL->Top + paddleL->Height - 50){
+                if(ball->Top > paddleL->Top + 25 &&
+                ball->Top < paddleL->Top + paddleL->Height - 65){
                         ballXMove = -regularBallXMove * 2;
                 }
                 else {
                         ballXMove = -regularBallXMove;
+                        if(ballYMove > 0) ballYMove = regularBallYMove;
+                        else ballYMove = -regularBallYMove;
                 }
 
                 ballXMove = -ballXMove;
                 bounces++;
         }
 
+        //right paddle bounce or fail
         if(ball->Left + ball->Width >= tlo->Width + 10){
                 timerBall->Enabled = false;
                 ball->Visible = false;
@@ -155,12 +160,14 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 ball->Top <= paddleR->Top + paddleR->Height - ball->Height/2 &&
                 ball->Left + ball->Width >= paddleR->Left){
 
-                if(ball->Top >= paddleR->Top + 20 &&
-                ball->Top <= paddleR->Top + paddleR->Height - 50){
+                if(ball->Top >= paddleR->Top + 25 &&
+                ball->Top <= paddleR->Top + paddleR->Height - 65){
                         ballXMove = regularBallXMove * 2;
                 }
                 else {
                         ballXMove = regularBallXMove;
+                        if(ballYMove > 0) ballYMove = regularBallYMove;
+                        else ballYMove = -regularBallYMove;
                 }
 
                 ballXMove = -ballXMove;
@@ -182,13 +189,15 @@ void __fastcall Tgameboard::Button1Click(TObject *Sender)
         Button1->Visible = false;
         regularBallXMove = 10;
         regularBallYMove = 5;
+        ballXMove =  regularBallXMove;
+        ballYMove =  regularBallYMove;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall Tgameboard::Button2Click(TObject *Sender)
 {
-    ball->Top = 200;
-    ball->Left = 400;
+    ball->Top = rand() % 330 + 100;
+    ball->Left = rand() % 150 + 450;
     ballXMove = regularBallXMove;
     ballYMove = regularBallYMove;
     ball->Visible = true;
@@ -208,8 +217,8 @@ void __fastcall Tgameboard::Button3Click(TObject *Sender)
 {
     leftPlayerPoints = 0;
     rightPlayerPoints = 0;
-    ball->Top = 200;
-    ball->Left = 400;
+    ball->Top = rand() % 330 + 100;
+    ball->Left = rand() % 150 + 450;
     ballXMove = regularBallXMove;
     ballYMove = regularBallYMove;
     ball->Visible = true;
@@ -229,6 +238,13 @@ void __fastcall Tgameboard::Button3Click(TObject *Sender)
 void __fastcall Tgameboard::Button4Click(TObject *Sender)
 {
     Application->Terminate();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgameboard::FormCreate(TObject *Sender)
+{
+    ball->Top = rand() % 330 + 100;
+    ball->Left = rand() % 150 + 450;
 }
 //---------------------------------------------------------------------------
 

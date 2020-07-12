@@ -18,7 +18,6 @@ int rightPlayerPoints = 0;
 int bounces = 0;
 int gameTime = 0;
 
-
 //---------------------------------------------------------------------------
 __fastcall Tgameboard::Tgameboard(TComponent* Owner)
         : TForm(Owner)
@@ -92,8 +91,18 @@ void __fastcall Tgameboard::FormKeyUp(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
 {
-        if((ball->Top <= 10) || (ball->Top + ball->Height >= tlo->Height - 10)){
-           ballYMove = -ballYMove;
+        if(gameTime > 0 && gameTime % 500 == 0){
+            regularBallXMove += 4;
+            regularBallYMove += 2;
+        }
+
+        if(ball->Top <= 10){
+            ballYMove = regularBallYMove;
+        }
+
+
+        else if(ball->Top + ball->Height >= tlo->Height - 10){
+           ballYMove = -regularBallYMove;
         }
 
         if(ball->Left < paddleL->Left - 10){
@@ -105,6 +114,8 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 Label1->Caption = "Right player has won the round >>";
                 Label2->Visible = true;
                 Label2->Caption = "Score: " + IntToStr(leftPlayerPoints) + " - " + IntToStr(rightPlayerPoints);
+                Label3->Visible = true;
+                Label3->Caption = "Bounces: " + IntToStr(bounces);                
                 Button2->Visible = true;
                 Button3->Visible = true;
                 Button4->Visible = true;
@@ -122,6 +133,7 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 }
 
                 ballXMove = -ballXMove;
+                bounces++;
         }
 
         if(ball->Left + ball->Width >= tlo->Width + 10){
@@ -152,18 +164,15 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 }
 
                 ballXMove = -ballXMove;
+                bounces++;
         }
-        /*if(gameTime >= 400){
-            ballXMove = 3 * ballXMove;
-            ballYMove = 3 * ballYMove;
-        }    */
+
 
         ball->Top += ballYMove;
         ball->Left += ballXMove;
-        bounces++;
         gameTime++;
 
-        Label4->Caption = "Game time: " + IntToStr(gameTime);
+        Label4->Caption = "Game time: " + IntToStr(gameTime/50) + " sec.";
 }
 //---------------------------------------------------------------------------
 
@@ -171,6 +180,8 @@ void __fastcall Tgameboard::Button1Click(TObject *Sender)
 {
         timerBall->Enabled = true;
         Button1->Visible = false;
+        regularBallXMove = 10;
+        regularBallYMove = 5;
 }
 //---------------------------------------------------------------------------
 
