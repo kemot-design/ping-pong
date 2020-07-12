@@ -17,7 +17,7 @@ __fastcall TgameMenu::TgameMenu(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TgameMenu::Button1Click(TObject *Sender)
 {
-        Form1->Visible = true;
+        gameboard->Visible = true;
         gameMenu->Close();
 }
 //---------------------------------------------------------------------------

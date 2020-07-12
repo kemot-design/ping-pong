@@ -26,3 +26,4 @@ void __fastcall TgameMenu::Button2Click(TObject *Sender)
         Application->Terminate();
 }
 //---------------------------------------------------------------------------
+

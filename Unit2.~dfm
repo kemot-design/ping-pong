@@ -1,6 +1,6 @@
 object gameMenu: TgameMenu
-  Left = -1241
-  Top = 532
+  Left = -1488
+  Top = 361
   BorderStyle = bsToolWindow
   Caption = 'gameMenu'
   ClientHeight = 441
@@ -12,6 +12,7 @@ object gameMenu: TgameMenu
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   Visible = True
   PixelsPerInch = 96
   TextHeight = 13

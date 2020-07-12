@@ -29,6 +29,8 @@ __published:	// IDE-managed Components
         TButton *Button2;
         TButton *Button3;
         TButton *Button4;
+    TLabel *Label3;
+    TLabel *Label4;
         void __fastcall timerPaddleLUpTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
