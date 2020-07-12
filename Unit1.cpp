@@ -4,7 +4,6 @@
 #pragma hdrstop
 
 #include "Unit1.h"
-#include "Unit3.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -17,10 +16,6 @@ int regularBallYMove = 5;
 int leftPlayerPoints = 0;
 int rightPlayerPoints = 0;
 
-void gameOver(){
-
-
-}
 
 //---------------------------------------------------------------------------
 __fastcall Tgameboard::Tgameboard(TComponent* Owner)
@@ -52,9 +47,6 @@ void __fastcall Tgameboard::FormKeyDown(TObject *Sender, WORD &Key,
          }
          if(Key == VK_DOWN){
                 timerPaddleRDown->Enabled = true;
-         }
-         if(Key == VK_SPACE){
-                Button1Click(gameboard);
          }
 
 }
@@ -93,11 +85,15 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
         if(ball->Left <= tlo->Left - ball->Width){
                 timerBall->Enabled = false;
                 ball->Visible = false;
-                ball->Top = 200;
-                ball->Left = 400;
-                ShowMessage("Game over! Right player have won!");
                 rightPlayerPoints++;
-                gameOver();
+
+                Label1->Visible = true;
+                Label1->Caption = "Right player has won the round >>";
+                Label2->Visible = true;
+                Label2->Caption = "Score: " + IntToStr(leftPlayerPoints) + " - " + IntToStr(rightPlayerPoints);
+                Button2->Visible = true;
+                Button3->Visible = true;
+                Button4->Visible = true;
         }
         else if(ball->Top >= paddleL->Top - ball->Height/2 &&
                 ball->Top <= paddleL->Top + paddleL->Height + ball->Height/2 &&
@@ -116,9 +112,15 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
         if(ball->Left >= tlo->Width){
                 timerBall->Enabled = false;
                 ball->Visible = false;
-                ball->Top = 200;
-                ball->Left = 400;
-                ShowMessage("Game over! Left player have won!");
+                leftPlayerPoints++;
+
+                Label1->Visible = true;
+                Label1->Caption = "<< Left player has won the round";
+                Label2->Visible = true;
+                Label2->Caption = "Score: " + IntToStr(leftPlayerPoints) + " - " + IntToStr(rightPlayerPoints);
+                Button2->Visible = true;
+                Button3->Visible = true;
+                Button4->Visible = true;
         }
         else if(ball->Top >= paddleR->Top - ball->Height/2 &&
                 ball->Top <= paddleR->Top + paddleR->Height + ball->Height/2 &&
@@ -150,4 +152,44 @@ void __fastcall Tgameboard::Button1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall Tgameboard::Button2Click(TObject *Sender)
+{
+    ball->Top = 200;
+    ball->Left = 400;
+    ballXMove = regularBallXMove;
+    ballYMove = regularBallYMove;
+    ball->Visible = true;
+    Button1->Visible = true;
+    Button2->Visible = false;
+    Button3->Visible = false;
+    Button4->Visible = false;
+    Label1->Visible = false;
+    Label2->Visible = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgameboard::Button3Click(TObject *Sender)
+{
+    leftPlayerPoints = 0;
+    rightPlayerPoints = 0;
+    ball->Top = 200;
+    ball->Left = 400;
+    ballXMove = regularBallXMove;
+    ballYMove = regularBallYMove;
+    ball->Visible = true;
+    Button1->Visible = true;
+    Button2->Visible = false;
+    Button3->Visible = false;
+    Button4->Visible = false;
+    Label1->Visible = false;
+    Label2->Visible = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgameboard::Button4Click(TObject *Sender)
+{
+    Application->Terminate();
+}
+//---------------------------------------------------------------------------
 

@@ -39,6 +39,9 @@ __published:	// IDE-managed Components
         void __fastcall timerPaddleRUpTimer(TObject *Sender);
         void __fastcall timerPaddleRDownTimer(TObject *Sender);
         void __fastcall Button1Click(TObject *Sender);
+    void __fastcall Button2Click(TObject *Sender);
+    void __fastcall Button3Click(TObject *Sender);
+    void __fastcall Button4Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall Tgameboard(TComponent* Owner);

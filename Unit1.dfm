@@ -1,6 +1,6 @@
 object gameboard: Tgameboard
-  Left = -1478
-  Top = 345
+  Left = 157
+  Top = 138
   Width = 1012
   Height = 598
   Caption = 'gameboard'
@@ -49641,6 +49641,7 @@ object gameboard: Tgameboard
     Font.Style = []
     ParentFont = False
     Layout = tlCenter
+    Visible = False
   end
   object Label2: TLabel
     Left = 432
@@ -49656,13 +49657,14 @@ object gameboard: Tgameboard
     Font.Style = []
     ParentFont = False
     Layout = tlCenter
+    Visible = False
   end
   object Button1: TButton
     Left = 376
     Top = 176
     Width = 227
     Height = 97
-    Caption = 'Start! [space]'
+    Caption = 'Start!'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -27
@@ -49685,6 +49687,8 @@ object gameboard: Tgameboard
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    Visible = False
+    OnClick = Button2Click
   end
   object Button3: TButton
     Left = 408
@@ -49699,6 +49703,8 @@ object gameboard: Tgameboard
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    Visible = False
+    OnClick = Button3Click
   end
   object Button4: TButton
     Left = 657
@@ -49713,6 +49719,8 @@ object gameboard: Tgameboard
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+    Visible = False
+    OnClick = Button4Click
   end
   object timerPaddleLUp: TTimer
     Enabled = False
