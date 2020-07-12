@@ -11,7 +11,7 @@
 #include <jpeg.hpp>
 #include <Graphics.hpp>
 //---------------------------------------------------------------------------
-class TForm1 : public TForm
+class Tgameboard : public TForm
 {
 __published:	// IDE-managed Components
         TImage *paddleL;
@@ -23,6 +23,14 @@ __published:	// IDE-managed Components
         TTimer *timerPaddleRUp;
         TTimer *timerPaddleRDown;
         TImage *tlo;
+        TButton *Button1;
+        TLabel *Label1;
+        TLabel *Label2;
+        TButton *Button2;
+        TButton *Button3;
+        TButton *Button4;
+    TLabel *Label3;
+    TLabel *Label4;
         void __fastcall timerPaddleLUpTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
@@ -32,11 +40,16 @@ __published:	// IDE-managed Components
         void __fastcall timerBallTimer(TObject *Sender);
         void __fastcall timerPaddleRUpTimer(TObject *Sender);
         void __fastcall timerPaddleRDownTimer(TObject *Sender);
+        void __fastcall Button1Click(TObject *Sender);
+    void __fastcall Button2Click(TObject *Sender);
+    void __fastcall Button3Click(TObject *Sender);
+    void __fastcall Button4Click(TObject *Sender);
+    void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
-        __fastcall TForm1(TComponent* Owner);
+        __fastcall Tgameboard(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm1 *Form1;
+extern PACKAGE Tgameboard *gameboard;
 //---------------------------------------------------------------------------
 #endif

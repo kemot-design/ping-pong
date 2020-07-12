@@ -1,6 +1,6 @@
 object gameMenu: TgameMenu
-  Left = 279
-  Top = 184
+  Left = -1488
+  Top = 361
   BorderStyle = bsToolWindow
   Caption = 'gameMenu'
   ClientHeight = 441
@@ -12,6 +12,7 @@ object gameMenu: TgameMenu
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   Visible = True
   PixelsPerInch = 96
   TextHeight = 13
@@ -3883,11 +3884,11 @@ object gameMenu: TgameMenu
       DD47E940EC479A3A9A6CA76D08D95354908709180FC68A6939A28E50BB3FFFD9}
   end
   object Label1: TLabel
-    Left = 264
-    Top = 112
-    Width = 383
+    Left = 272
+    Top = 64
+    Width = 424
     Height = 34
-    Caption = 'Ping - Pong The Game'
+    Caption = 'Volley - Pong The Game'
     Color = clWhite
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWhite
@@ -3898,11 +3899,31 @@ object gameMenu: TgameMenu
     ParentFont = False
     Transparent = True
   end
+  object Label2: TLabel
+    Left = 8
+    Top = 296
+    Width = 289
+    Height = 145
+    Caption = 
+      'To move right paddle use arrow Up and Down, to move left paddle ' +
+      'use A and Z. Bouncing with the middle of the paddle will increas' +
+      'e ball speed, what is more ball is going to move faster every co' +
+      'uple of seconds.'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'BankGothic Lt BT'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    WordWrap = True
+  end
   object Button1: TButton
-    Left = 168
-    Top = 232
+    Left = 336
+    Top = 216
     Width = 161
     Height = 73
+    Cursor = crHandPoint
     Caption = 'New game'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
@@ -3914,10 +3935,11 @@ object gameMenu: TgameMenu
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 584
-    Top = 232
+    Left = 552
+    Top = 216
     Width = 161
     Height = 73
+    Cursor = crHandPoint
     Caption = 'Exit'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
