@@ -31,6 +31,11 @@ __published:	// IDE-managed Components
     TButton *exitBtn;
     TLabel *bouncesLabel;
     TLabel *gameTimeLabel;
+    TImage *leftBlock;
+    TTimer *blockLeftTimer;
+    TImage *rightBlock;
+    TTimer *leftBlockTimer;
+    TTimer *rightBlockTimer;
         void __fastcall timerPaddleLUpTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
@@ -45,6 +50,8 @@ __published:	// IDE-managed Components
     void __fastcall newGameBtnClick(TObject *Sender);
     void __fastcall exitBtnClick(TObject *Sender);
     void __fastcall FormCreate(TObject *Sender);
+    void __fastcall blockLeftTimerTimer(TObject *Sender);
+    void __fastcall rightBlockTimerTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall Tgameboard(TComponent* Owner);

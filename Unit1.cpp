@@ -18,6 +18,8 @@ int leftPlayerPoints = 0;
 int rightPlayerPoints = 0;
 int bounces = 0;
 int gameTime = 0;
+int leftBlockMove = 2;
+int rightBlockMove = -2;
 
 void centerLabels(){
     gameboard->startBtn->Left = gameboard->background->Width / 2 - gameboard->startBtn->Width / 2;
@@ -41,6 +43,8 @@ void prepareFormToPlay(){
     gameboard->winnerLabel->Visible = false;
     gameboard->scoreLabel->Visible = false;
     gameboard->bouncesLabel->Visible = false;
+    gameboard->leftBlockTimer->Enabled = true;
+    gameboard->rightBlockTimer->Enabled = true;
     gameTime = 0;
     bounces = 0;
 
@@ -56,6 +60,8 @@ void prepareFormAfterRound(AnsiString winner){
     gameboard->nextRoundBtn->Visible = true;
     gameboard->newGameBtn->Visible = true;
     gameboard->exitBtn->Visible = true;
+    gameboard->leftBlockTimer->Enabled = false;
+    gameboard->rightBlockTimer->Enabled = false;
     centerLabels();
 
 }
@@ -202,6 +208,23 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 bounces++;
         }
 
+        //left block
+        if(ballXMove < 0 && ball->Top + ball->Height/2 >= leftBlock->Top &&
+        ball->Top + ball->Height/2 <= leftBlock->Top + leftBlock->Height &&
+        ball->Left <= leftBlock->Left + leftBlock->Width - 10 &&
+        ball->Left > leftBlock->Left){
+            sndPlaySound("snd/block.wav",SND_ASYNC);
+            ballXMove = -ballXMove;
+        }
+
+        //right block
+        if(ballXMove > 0 && ball->Top + ball->Height/2 >= rightBlock->Top &&
+        ball->Top + ball->Height/2 <= rightBlock->Top + rightBlock->Height &&
+        ball->Left + ball->Width >= rightBlock->Left + 10 &&
+        ball->Left + ball->Width < rightBlock->Left + rightBlock->Width){
+            sndPlaySound("snd/block.wav",SND_ASYNC);
+            ballXMove = -ballXMove;
+        }
 
         ball->Top += ballYMove;
         ball->Left += ballXMove;
@@ -217,6 +240,8 @@ void __fastcall Tgameboard::startBtnClick(TObject *Sender)
         startBtn->Visible = false;
         regularBallXMove = 10;
         regularBallYMove = 5;
+        leftBlockTimer->Enabled = true;
+        rightBlockTimer->Enabled = true;
 }
 //---------------------------------------------------------------------------
 
@@ -239,8 +264,8 @@ void __fastcall Tgameboard::newGameBtnClick(TObject *Sender)
     ball->Left = rand() % 150 + 450;
     prepareFormToPlay();
 
-    ballXMove = regularBallXMove;
-    ballYMove = regularBallYMove;
+    ballXMove = 10;
+    ballYMove = 5;
 }
 //---------------------------------------------------------------------------
 
@@ -254,6 +279,32 @@ void __fastcall Tgameboard::FormCreate(TObject *Sender)
 {
     ball->Top = rand() % 330 + 100;
     ball->Left = rand() % 150 + 450;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgameboard::blockLeftTimerTimer(TObject *Sender)
+{
+    if(leftBlock->Top < 0){
+        leftBlockMove = -leftBlockMove;
+    }
+    else if(leftBlock->Top + leftBlock->Height > background->Height){
+        leftBlockMove = -leftBlockMove;
+    }
+
+    leftBlock->Top += leftBlockMove;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall Tgameboard::rightBlockTimerTimer(TObject *Sender)
+{
+    if(rightBlock->Top < 0){
+        rightBlockMove = -rightBlockMove;
+    }
+    else if(rightBlock->Top + rightBlock->Height > background->Height){
+        rightBlockMove = -rightBlockMove;
+    }
+
+    rightBlock->Top += rightBlockMove;
 }
 //---------------------------------------------------------------------------
 
