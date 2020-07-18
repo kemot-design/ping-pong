@@ -1,6 +1,6 @@
 object gameboard: Tgameboard
-  Left = 159
-  Top = 117
+  Left = 312
+  Top = 116
   Width = 1012
   Height = 598
   Caption = 'gameboard'

@@ -3,6 +3,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include "mmsystem.h"
 #include "Unit1.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -36,7 +37,7 @@ void prepareFormToPlay(){
     gameboard->nextRoundBtn->Visible = false;
     gameboard->newGameBtn->Visible = false;
     gameboard->exitBtn->Visible = false;
-    gameboard->gameTimeLabel->Visible = false;
+    gameboard->gameTimeLabel->Visible = true;
     gameboard->winnerLabel->Visible = false;
     gameboard->scoreLabel->Visible = false;
     gameboard->bouncesLabel->Visible = false;
@@ -142,7 +143,7 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
             ballYMove = regularBallYMove;
         }
 
-        // bounde botton
+        // bounce botton
         else if(ball->Top + ball->Height >= background->Height - 10){
            ballYMove = -regularBallYMove;
         }
@@ -161,11 +162,13 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 if(ball->Top > paddleL->Top + 25 &&
                 ball->Top < paddleL->Top + paddleL->Height - 65){
                         ballXMove = -regularBallXMove * 2;
+                        sndPlaySound("snd/Ricochet.wav", SND_ASYNC);
                 }
                 else {
                         ballXMove = -regularBallXMove;
                         if(ballYMove > 0) ballYMove = regularBallYMove;
                         else ballYMove = -regularBallYMove;
+                        sndPlaySound("snd/BallBounce.wav", SND_ASYNC);
                 }
 
                 ballXMove = -ballXMove;
@@ -186,11 +189,13 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 if(ball->Top >= paddleR->Top + 25 &&
                 ball->Top <= paddleR->Top + paddleR->Height - 65){
                         ballXMove = regularBallXMove * 2;
+                        sndPlaySound("snd/Ricochet.wav", SND_ASYNC);
                 }
                 else {
                         ballXMove = regularBallXMove;
                         if(ballYMove > 0) ballYMove = regularBallYMove;
                         else ballYMove = -regularBallYMove;
+                        sndPlaySound("snd/BallBounce.wav", SND_ASYNC);
                 }
 
                 ballXMove = -ballXMove;

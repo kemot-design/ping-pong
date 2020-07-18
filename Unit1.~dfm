@@ -1,6 +1,6 @@
 object gameboard: Tgameboard
-  Left = 157
-  Top = 130
+  Left = 159
+  Top = 117
   Width = 1012
   Height = 598
   Caption = 'gameboard'
@@ -18,7 +18,7 @@ object gameboard: Tgameboard
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
-  object tlo: TImage
+  object background: TImage
     Left = 0
     Top = 0
     Width = 1001
@@ -49361,7 +49361,7 @@ object gameboard: Tgameboard
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
     Transparent = True
   end
-  object Label1: TLabel
+  object winnerLabel: TLabel
     Left = 254
     Top = 104
     Width = 492
@@ -49377,7 +49377,7 @@ object gameboard: Tgameboard
     Layout = tlCenter
     Visible = False
   end
-  object Label2: TLabel
+  object scoreLabel: TLabel
     Left = 448
     Top = 144
     Width = 110
@@ -49393,7 +49393,7 @@ object gameboard: Tgameboard
     Layout = tlCenter
     Visible = False
   end
-  object Label3: TLabel
+  object bouncesLabel: TLabel
     Left = 432
     Top = 184
     Width = 137
@@ -49409,7 +49409,7 @@ object gameboard: Tgameboard
     Layout = tlCenter
     Visible = False
   end
-  object Label4: TLabel
+  object gameTimeLabel: TLabel
     Left = 440
     Top = 528
     Width = 152
@@ -49424,7 +49424,7 @@ object gameboard: Tgameboard
     ParentFont = False
     Layout = tlCenter
   end
-  object Button1: TButton
+  object startBtn: TButton
     Left = 432
     Top = 40
     Width = 121
@@ -49438,12 +49438,12 @@ object gameboard: Tgameboard
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = startBtnClick
   end
-  object Button2: TButton
+  object nextRoundBtn: TButton
     Left = 160
     Top = 359
-    Width = 177
+    Width = 175
     Height = 81
     Cursor = crHandPoint
     Caption = 'Next round'
@@ -49455,12 +49455,12 @@ object gameboard: Tgameboard
     ParentFont = False
     TabOrder = 1
     Visible = False
-    OnClick = Button2Click
+    OnClick = nextRoundBtnClick
   end
-  object Button3: TButton
+  object newGameBtn: TButton
     Left = 408
     Top = 359
-    Width = 177
+    Width = 175
     Height = 81
     Cursor = crHandPoint
     Caption = 'New game'
@@ -49472,12 +49472,12 @@ object gameboard: Tgameboard
     ParentFont = False
     TabOrder = 2
     Visible = False
-    OnClick = Button3Click
+    OnClick = newGameBtnClick
   end
-  object Button4: TButton
+  object exitBtn: TButton
     Left = 657
     Top = 359
-    Width = 177
+    Width = 175
     Height = 81
     Cursor = crHandPoint
     Caption = 'Exit'
@@ -49489,7 +49489,7 @@ object gameboard: Tgameboard
     ParentFont = False
     TabOrder = 3
     Visible = False
-    OnClick = Button4Click
+    OnClick = exitBtnClick
   end
   object timerPaddleLUp: TTimer
     Enabled = False

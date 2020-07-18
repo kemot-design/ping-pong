@@ -18,6 +18,47 @@ int rightPlayerPoints = 0;
 int bounces = 0;
 int gameTime = 0;
 
+void centerLabels(){
+    gameboard->startBtn->Left = gameboard->background->Width / 2 - gameboard->startBtn->Width / 2;
+    gameboard->winnerLabel->Left = gameboard->background->Width / 2 - gameboard->winnerLabel->Width / 2;
+    gameboard->scoreLabel->Left = gameboard->background->Width / 2 - gameboard->scoreLabel->Width / 2;
+    gameboard->bouncesLabel->Left = gameboard->background->Width / 2 - gameboard->bouncesLabel->Width / 2;
+    gameboard->gameTimeLabel->Left = gameboard->background->Width / 2 - gameboard->gameTimeLabel->Width / 2;
+    gameboard->newGameBtn->Left = gameboard->background->Width / 2 - gameboard->newGameBtn->Width / 2;
+    gameboard->nextRoundBtn->Left = gameboard->background->Width / 2 - 350;
+    gameboard->exitBtn->Left = gameboard->background->Width / 2 + 175;
+
+}
+
+void prepareFormToPlay(){
+    gameboard->ball->Visible = true;
+    gameboard->startBtn->Visible = true;
+    gameboard->nextRoundBtn->Visible = false;
+    gameboard->newGameBtn->Visible = false;
+    gameboard->exitBtn->Visible = false;
+    gameboard->gameTimeLabel->Visible = false;
+    gameboard->winnerLabel->Visible = false;
+    gameboard->scoreLabel->Visible = false;
+    gameboard->bouncesLabel->Visible = false;
+    gameTime = 0;
+    bounces = 0;
+
+}
+
+void prepareFormAfterRound(AnsiString winner){
+    gameboard->winnerLabel->Visible = true;
+    gameboard->winnerLabel->Caption = winner + " player has won the round >>";
+    gameboard->scoreLabel->Visible = true;
+    gameboard->scoreLabel->Caption = "Score: " + IntToStr(leftPlayerPoints) + " - " + IntToStr(rightPlayerPoints);
+    gameboard->bouncesLabel->Visible = true;
+    gameboard->bouncesLabel->Caption = "Bounces: " + IntToStr(bounces);
+    gameboard->nextRoundBtn->Visible = true;
+    gameboard->newGameBtn->Visible = true;
+    gameboard->exitBtn->Visible = true;
+    centerLabels();
+
+}
+
 //---------------------------------------------------------------------------
 __fastcall Tgameboard::Tgameboard(TComponent* Owner)
         : TForm(Owner)
@@ -34,7 +75,7 @@ void __fastcall Tgameboard::timerPaddleLUpTimer(TObject *Sender)
 
 void __fastcall Tgameboard::timerPaddleLDownTimer(TObject *Sender)
 {
-        if(paddleL->Top + paddleL->Height < tlo->Height - 10) paddleL->Top += 8;
+        if(paddleL->Top + paddleL->Height < background->Height - 10) paddleL->Top += 8;
 }
 //---------------------------------------------------------------------------
 
@@ -46,7 +87,7 @@ void __fastcall Tgameboard::timerPaddleRUpTimer(TObject *Sender)
 
 void __fastcall Tgameboard::timerPaddleRDownTimer(TObject *Sender)
 {
-        if(paddleR->Top + paddleR->Height < tlo->Height - 10) paddleR->Top += 8;
+        if(paddleR->Top + paddleR->Height < background->Height - 10) paddleR->Top += 8;
 }
 //---------------------------------------------------------------------------
 
@@ -102,7 +143,7 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
         }
 
         // bounde botton
-        else if(ball->Top + ball->Height >= tlo->Height - 10){
+        else if(ball->Top + ball->Height >= background->Height - 10){
            ballYMove = -regularBallYMove;
         }
 
@@ -111,16 +152,7 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
                 timerBall->Enabled = false;
                 ball->Visible = false;
                 rightPlayerPoints++;
-
-                Label1->Visible = true;
-                Label1->Caption = "Right player has won the round >>";
-                Label2->Visible = true;
-                Label2->Caption = "Score: " + IntToStr(leftPlayerPoints) + " - " + IntToStr(rightPlayerPoints);
-                Label3->Visible = true;
-                Label3->Caption = "Bounces: " + IntToStr(bounces);                
-                Button2->Visible = true;
-                Button3->Visible = true;
-                Button4->Visible = true;
+                prepareFormAfterRound("Right");
         }
         else if(ball->Top >= paddleL->Top - (ball->Height/2) &&
                 ball->Top <= paddleL->Top + paddleL->Height - (ball->Height/2) &&
@@ -141,20 +173,11 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
         }
 
         //right paddle bounce or fail
-        if(ball->Left + ball->Width >= tlo->Width + 10){
+        if(ball->Left + ball->Width >= background->Width + 10){
                 timerBall->Enabled = false;
                 ball->Visible = false;
                 leftPlayerPoints++;
-
-                Label1->Visible = true;
-                Label1->Caption = "<< Left player has won the round";
-                Label2->Visible = true;
-                Label2->Caption = "Score: " + IntToStr(leftPlayerPoints) + " - " + IntToStr(rightPlayerPoints);
-                Label3->Visible = true;
-                Label3->Caption = "Bounces: " + IntToStr(bounces);
-                Button2->Visible = true;
-                Button3->Visible = true;
-                Button4->Visible = true;
+                prepareFormAfterRound("Left");
         }
         else if(ball->Top >= paddleR->Top - (ball->Height/2) &&
                 ball->Top <= paddleR->Top + paddleR->Height - ball->Height/2 &&
@@ -179,63 +202,44 @@ void __fastcall Tgameboard::timerBallTimer(TObject *Sender)
         ball->Left += ballXMove;
         gameTime++;
 
-        Label4->Caption = "Game time: " + IntToStr(gameTime/50) + " sec.";
+        gameTimeLabel->Caption = "Game time: " + IntToStr(gameTime/50) + " sec.";
 }
 //---------------------------------------------------------------------------
 
-void __fastcall Tgameboard::Button1Click(TObject *Sender)
+void __fastcall Tgameboard::startBtnClick(TObject *Sender)
 {
         timerBall->Enabled = true;
-        Button1->Visible = false;
+        startBtn->Visible = false;
         regularBallXMove = 10;
         regularBallYMove = 5;
-        ballXMove =  regularBallXMove;
-        ballYMove =  regularBallYMove;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall Tgameboard::Button2Click(TObject *Sender)
+void __fastcall Tgameboard::nextRoundBtnClick(TObject *Sender)
 {
     ball->Top = rand() % 330 + 100;
     ball->Left = rand() % 150 + 450;
-    ballXMove = regularBallXMove;
-    ballYMove = regularBallYMove;
-    ball->Visible = true;
-    Button1->Visible = true;
-    Button2->Visible = false;
-    Button3->Visible = false;
-    Button4->Visible = false;
-    Label1->Visible = false;
-    Label2->Visible = false;
-    Label3->Visible = false;
-    gameTime = 0;
-    bounces = 0;
+    prepareFormToPlay();
+    if(ballXMove > 0) ballXMove = -10;
+    else ballXMove = 10;
+
 }
 //---------------------------------------------------------------------------
 
-void __fastcall Tgameboard::Button3Click(TObject *Sender)
+void __fastcall Tgameboard::newGameBtnClick(TObject *Sender)
 {
     leftPlayerPoints = 0;
     rightPlayerPoints = 0;
     ball->Top = rand() % 330 + 100;
     ball->Left = rand() % 150 + 450;
+    prepareFormToPlay();
+
     ballXMove = regularBallXMove;
     ballYMove = regularBallYMove;
-    ball->Visible = true;
-    Button1->Visible = true;
-    Button2->Visible = false;
-    Button3->Visible = false;
-    Button4->Visible = false;
-    Label1->Visible = false;
-    Label2->Visible = false;
-    Label3->Visible = false;
-    gameTime = 0;
-    bounces = 0;
-
 }
 //---------------------------------------------------------------------------
 
-void __fastcall Tgameboard::Button4Click(TObject *Sender)
+void __fastcall Tgameboard::exitBtnClick(TObject *Sender)
 {
     Application->Terminate();
 }
